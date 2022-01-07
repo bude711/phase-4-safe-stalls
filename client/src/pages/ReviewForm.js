@@ -1,51 +1,31 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function ReviewForm({ review, onChangeForm, onEditReview, onAddReviews, setLocations }) {
-    const [comment, setComment] = useState("");
+function ReviewForm({ onAddReviews}) {
+    const [comments, setComments] = useState("");
     const [rating, setRating] = useState("");
-    const [locationId, setLocationId] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-
-//   function handleInputChange(event) {
-//     onChangeForm(event.target.name, event.target.value);
-//   }
-
-useEffect(() => {
-  fetch("api/locations")
-    .then((r) => r.json())
-    .then(setLocations);
-}, []);
-
-
-
-  function handleSubmit(e) {
+  function handleSubmit(e,id) {
     e.preventDefault();
     setIsLoading(true);
-    const formData = {
-      location_id: locationId,
-      comments: comment, 
-      rating: rating,
-      
-    }
-
     fetch(`api/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData), 
+      body: JSON.stringify({
+          rating,
+          comments,
+      }), 
     }).then((r) => {
-
       setIsLoading(false);
       if (r.ok) {
         r.json().then((newReview) => {
-          setComment("");
-          setRating();
-          setErrors([]);
-          onAddReviews(newReview);
+            setComments("");
+            setRating("");
+            setErrors([]);
+            onAddReviews(newReview);
         });
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -54,41 +34,23 @@ useEffect(() => {
   }
 
 
-
-//   function handleReviewChange(event, id) {
-//     event.preventDefault();
-//     fetch(`./reviews/${id}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(review),
-//     })
-//       .then((r) => r.json())
-//       .then(onEditReview);
-//   }
-
-//   if (!review) return null;
-
-//   const { comment, rating } = review;
-
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Add New Review</h2>
+      <h4>Add New Review</h4>
       <div className="form-row">
         <div className="col-5">
           <input
             type="text"
-            className="form-control"
+            id="comment"
             placeholder="Comment"
-            name="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            name="comments"
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
           />
            &nbsp;&nbsp;
        <input
             type="number"
-            className="form-control"
+            id="rating"
             placeholder="Rating"
             name="rating"
             value={rating}

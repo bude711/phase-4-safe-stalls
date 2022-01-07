@@ -1,26 +1,25 @@
-// import React, { useState} from "react";
 
-// function Review() {
-//  const [reviews, setReviews] = useState([]);
-
-// useEffect(() => {
-//     fetch("api/reviews")
-//       .then((r) => r.json())
-//       .then(setReviews);
-//   }, []);
+import React from "react";
+import styled from "styled-components";
 
 
-  // function handleAddReviews(newReviews) {
-  //   setReviews((reviews) => [...reviews, newReviews]);
-  // }
-
-  // function handleEditReview(updatedReview) {
-  //   const updatedReviews = reviews.map((review) =>
-  //     review.id === updatedReview.id ? updatedReview : review
-  //   );
-  //   setReviews(updatedReviews);
-  // }
-
+function Review({review}) {
  
-  // export default Review;
+  return (
+      <Wrapper>
+            <em>{review.comments}</em>
+            &nbsp;·&nbsp;
+            <em>{review.rating}/10</em>          
+         
+        </Wrapper>
+  );
+}
 
+
+const Wrapper = styled.section`
+  max-width: 800px;
+  margin: 40px auto;
+`;
+
+export default Review;
+ 

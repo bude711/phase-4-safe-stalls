@@ -3,22 +3,20 @@ import Location from "../pages/Location";
 
 
 
-
-function LocationList({bathrooms, onDeleteBathroom, onUpdateBathroom}) {
+function LocationList({bathrooms, onDeleteBathroom, reviews}) {
   
   const bathroomLocationList = bathrooms?.map((bathroom) => (
-    <Location key={bathroom.id} bathroom={bathroom} onDeleteBathroom={onDeleteBathroom} />
+    <Location key={bathroom.id} bathroom={bathroom} reviews={reviews} onDeleteBathroom={onDeleteBathroom} />
+
   ));
-  
- 
-
-
-
 
   return (
     <Wrapper>
- <div></div>
-    <div>{bathroomLocationList}</div>
+
+     <div>{bathroomLocationList}</div>    
+
+
+    
 
     
 
@@ -26,6 +24,7 @@ function LocationList({bathrooms, onDeleteBathroom, onUpdateBathroom}) {
            
   );
 }
+
 
 const Wrapper = styled.section`
   max-width: 800px;

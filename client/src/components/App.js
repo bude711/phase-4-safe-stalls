@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 import '../styles/App.css';
 import LocationList from "../pages/LocationList";
 import NewBathroom from "../pages/NewBathroom";
-import ReviewList from "../pages/ReviewList";
+
 
 
 function App() {
@@ -47,6 +47,7 @@ function App() {
     setBathrooms((bathrooms) => [...bathrooms, newBathrooms]);
   }
 
+
   function handleDeleteBathroom(id) {
     setBathrooms((bathrooms) =>
       bathrooms.filter((bathroom) => bathroom.id !== id));
@@ -60,12 +61,15 @@ function App() {
   //     };
 
   if (!user) return <Login onLogin={setUser} />;
+
   return (
     <>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
-          <Route path="/locations" element={<LocationList bathrooms={bathrooms} onDeleteBathroom={handleDeleteBathroom} user={user} />}>
+
+          <Route path="/locations" element={<LocationList bathrooms={bathrooms} reviews={reviews} onDeleteBathroom={handleDeleteBathroom} user={user} />}>
+
           </Route>
 
           <Route path="/new" element={<NewBathroom onAddBathrooms={handleAddBathrooms} user={user} />}>

@@ -3,14 +3,13 @@ import styled from "styled-components";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 import { useNavigate } from "react-router-dom";
 
-function NewBathroom({ onAddBathrooms, user }) {
+
+function NewBathroom({ onAddBathrooms}) {
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [details, setDetails] = useState("");
-
   const navigate = useNavigate();
-
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -100,16 +99,7 @@ function NewBathroom({ onAddBathrooms, user }) {
           </FormField>
         </form>
       </WrapperChild>
-      {/* <WrapperChild>
-        <h1>{city}</h1>
-        <p>
-          <em>{name} </em>
-          <em>{address} </em>
-          <em>{details} </em>
-          &nbsp;·&nbsp;
-          {/* <cite>Submitted By {user.username}</cite> */}
-        {/* </p> */}
-      {/* // </WrapperChild> */} 
+
     </Wrapper>
   );
 }
